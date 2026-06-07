@@ -1,0 +1,17 @@
+title: "Portfolio — Angie"
+baseurl: ""
+url: ""
+
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - plan.md
+  - prd.md
+  - tasks.md
+  - skills-lock.json
+  - vendor/
+  - node_modules/

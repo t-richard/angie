@@ -1,0 +1,12 @@
+name: "Prénom Nom"
+title: "Titre / Rôle"
+description: "Courte description professionnelle — orientée relation client et développement commercial."
+interests:
+  - "Commerce & négociation"
+  - "Marketing digital"
+  - "Relation client"
+  - "Voyages"
+  - "Lecture"
+linkedin_url: "https://linkedin.com/in/votre-profil"
+photo: "/assets/images/profile.svg"
+qr_code: "/assets/images/qr-linkedin.svg"
