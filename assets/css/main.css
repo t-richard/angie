@@ -32,7 +32,7 @@ html {
 }
 
 body {
-  background-color: var(--bg);
+  background: radial-gradient(ellipse at 20% 0%, #fdf9f0 0%, var(--bg) 60%);
   color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   font-weight: 400;
@@ -55,6 +55,15 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 ul {
@@ -88,6 +97,7 @@ ul {
   letter-spacing: 0.01em;
   position: relative;
   padding-bottom: 0.5rem;
+  animation: splashTextIn 550ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 #splash-text::after {
@@ -95,10 +105,11 @@ ul {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 0;
   height: 3px;
   background: var(--accent);
   border-radius: 2px;
+  animation: splashLineIn 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
 }
 
 /* ─── Welcome tagline (main content) ────────────────────── */
@@ -136,13 +147,20 @@ ul {
   left: 0;
   right: 0;
   z-index: 100;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 221, 213, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 58px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 0 rgba(226, 221, 213, 0.8);
+  transition: box-shadow 200ms ease;
+}
+
+#nav.nav--scrolled {
+  box-shadow: 0 4px 24px rgba(26, 35, 51, 0.10), 0 1px 0 rgba(226, 221, 213, 0.6);
 }
 
 .nav__inner {
@@ -235,7 +253,10 @@ main {
   object-fit: cover;
   flex-shrink: 0;
   border: 4px solid var(--surface);
-  box-shadow: 0 0 0 3px var(--accent), var(--shadow-md);
+  box-shadow:
+    0 0 0 3px var(--accent),
+    0 0 0 8px rgba(212, 160, 23, 0.18),
+    var(--shadow-md);
 }
 
 .profile__info {
@@ -282,6 +303,12 @@ main {
   border: 1px solid #e8cc80;
   padding: 0.25rem 0.7rem;
   border-radius: 999px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.profile__interest-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(212, 160, 23, 0.22);
 }
 
 .profile__aside {
@@ -370,9 +397,15 @@ main {
   display: grid;
   grid-template-columns: 80px 1fr;
   gap: 0.75rem;
-  padding: 0.9rem 0;
+  padding: 0.9rem 0.5rem;
   border-bottom: 1px solid var(--border);
   position: relative;
+  border-radius: 6px;
+  transition: background var(--transition);
+}
+
+.timeline__item:hover {
+  background: rgba(253, 243, 208, 0.45);
 }
 
 .timeline__item:last-child {
@@ -394,6 +427,20 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   line-height: 1.4;
+  position: relative;
+  padding-left: 0.85rem;
+}
+
+.timeline__period::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .timeline__title {
@@ -457,8 +504,9 @@ main {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, opacity 400ms ease;
   position: relative;
+  opacity: 0;
 }
 
 .card::before {
@@ -468,15 +516,22 @@ main {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--accent-dark), var(--accent), #e8c040);
   opacity: 0;
   transition: opacity 150ms ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: #d5cfc6;
+  box-shadow: 0 20px 48px rgba(212, 160, 23, 0.14), 0 8px 20px rgba(26, 35, 51, 0.10);
+  border-color: rgba(212, 160, 23, 0.35);
+}
+
+.card--visible {
+  opacity: 1;
+}
+
+.card--visible:hover {
+  transform: translateY(-8px);
 }
 
 .card:hover::before {
@@ -488,6 +543,11 @@ main {
   height: 190px;
   object-fit: cover;
   background: #ede9e2;
+  transition: transform 300ms ease;
+}
+
+.card:hover .card__image {
+  transform: scale(1.04);
 }
 
 .card__body {
@@ -526,7 +586,9 @@ main {
 .modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(26, 35, 51, 0.55);
+  background: rgba(26, 35, 51, 0.50);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   animation: fadeIn 200ms ease;
 }
 
@@ -539,7 +601,7 @@ main {
   max-height: 90vh;
   overflow-y: auto;
   animation: modalIn 220ms ease;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 16px 56px rgba(26, 35, 51, 0.18), 0 4px 16px rgba(212, 160, 23, 0.10);
   border-top: 3px solid var(--accent);
 }
 
@@ -596,6 +658,16 @@ main {
 @keyframes modalIn {
   from { opacity: 0; transform: scale(0.96) translateY(8px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes splashTextIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes splashLineIn {
+  from { width: 0; }
+  to   { width: 100%; }
 }
 
 /* ─── Burger button (hidden on desktop) ──────────────────── */
@@ -722,5 +794,35 @@ main {
 
   .modal__title {
     font-size: 1.25rem;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    opacity: 1;
+    transition: box-shadow 150ms ease, border-color 150ms ease;
+  }
+
+  .card:hover .card__image {
+    transform: none;
+  }
+
+  #splash-text {
+    animation: none;
+  }
+
+  #splash-text::after {
+    width: 100%;
+    animation: none;
+  }
+
+  .modal__backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .profile__interest-tag:hover {
+    transform: none;
   }
 }

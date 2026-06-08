@@ -47,6 +47,22 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Nav scroll shadow ─────────────────────────────────────
+  const nav = document.getElementById('nav');
+  if (nav) {
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          nav.classList.toggle('nav--scrolled', window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+    nav.classList.toggle('nav--scrolled', window.scrollY > 10);
+  }
+
   // ── Active nav link ───────────────────────────────────────
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   document.querySelectorAll('.nav__link').forEach(function (link) {
@@ -104,6 +120,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
   modalClose.addEventListener('click', closeModal);
   modalBack.addEventListener('click', closeModal);
+
+  // ── Card fade-in ──────────────────────────────────────────
+  const cards = document.querySelectorAll('.card');
+  if (cards.length > 0) {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      cards.forEach(function (card) { card.classList.add('card--visible'); });
+    } else {
+      const cardObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const index = Array.prototype.indexOf.call(cards, entry.target);
+            setTimeout(function () {
+              entry.target.classList.add('card--visible');
+            }, Math.min(index, 6) * 80);
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      cards.forEach(function (card) { cardObserver.observe(card); });
+      setTimeout(function () {
+        cards.forEach(function (card) { card.classList.add('card--visible'); });
+      }, 1500);
+    }
+  }
 
   // Focus trap
   function trapFocus(container) {
