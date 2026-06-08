@@ -17,12 +17,6 @@ title: "Accueil"
   <div class="profile__info">
     <h1 class="profile__name">{{ site.data.profile.name }}</h1>
     <p class="profile__title">{{ site.data.profile.title }}</p>
-    <p class="profile__description">{{ site.data.profile.description }}</p>
-    <ul class="profile__interests">
-      {% for interest in site.data.profile.interests %}
-        <li class="profile__interest-tag">{{ interest }}</li>
-      {% endfor %}
-    </ul>
   </div>
 
   <aside class="profile__aside">
@@ -31,6 +25,15 @@ title: "Accueil"
       <span class="profile__qr-label">LinkedIn</span>
     </a>
   </aside>
+
+  <div class="profile__body">
+    <p class="profile__description">{{ site.data.profile.description }}</p>
+    <ul class="profile__interests">
+      {% for interest in site.data.profile.interests %}
+        <li class="profile__interest-tag">{{ interest }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 <div class="history-wrap">
