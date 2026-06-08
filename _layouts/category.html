@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+{% assign category = site.data[page.data_key] %}
+
+<h1 class="category__title">{{ category.title }}</h1>
+
+<div class="card-grid">
+  {% for competence in category.competences %}
+    {% include card.html competence=competence %}
+  {% endfor %}
+</div>

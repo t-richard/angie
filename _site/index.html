@@ -15,26 +15,35 @@
 </div>
 
   <nav id="nav">
-  <ul class="nav__links">
-    <li><a class="nav__link" href="/marketing">Marketing</a></li>
-    <li><a class="nav__link" href="/vente">Vente</a></li>
-    <li><a class="nav__link" href="/communication">Communication</a></li>
-    <li><a class="nav__link" href="/business-developpement">Business Développement</a></li>
-    <li><a class="nav__link" href="/management-relation-client">Management de la Relation Client</a></li>
-  </ul>
+  <div class="nav__inner">
+    <a class="nav__name" href="/">Angie Dubois</a>
+    <button class="nav__burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="nav-links">
+      <li><a class="nav__link" href="/marketing">Marketing</a></li>
+      <li><a class="nav__link" href="/vente">Vente</a></li>
+      <li><a class="nav__link" href="/communication">Communication</a></li>
+      <li><a class="nav__link" href="/business-developpement">Business Développement</a></li>
+      <li><a class="nav__link" href="/management-relation-client">Management de la Relation Client</a></li>
+    </ul>
+  </div>
 </nav>
 
   <main>
     <p id="header-tagline">Bienvenue sur mon portfolio</p>
 
 <div class="profile">
-  <img
-    class="profile__photo"
-    src="/assets/images/profile.svg"
-    alt="Photo de Prénom Nom"
-  >
+  <div class="profile__photo-wrap">
+    <img
+      class="profile__photo"
+      src="/assets/images/profile.svg"
+      alt="Photo de Angie Dubois"
+    >
+  </div>
+
   <div class="profile__info">
-    <h1 class="profile__name">Prénom Nom</h1>
+    <h1 class="profile__name">Angie Dubois</h1>
     <p class="profile__title">Titre / Rôle</p>
     <p class="profile__description">Courte description professionnelle — orientée relation client et développement commercial.</p>
     <ul class="profile__interests">
@@ -50,15 +59,114 @@
         <li class="profile__interest-tag">Lecture</li>
       
     </ul>
+  </div>
+
+  <aside class="profile__aside">
     <a class="profile__qr" href="https://linkedin.com/in/votre-profil" target="_blank" rel="noopener">
       <img src="/assets/images/qr-linkedin.svg" alt="QR code LinkedIn">
       <span class="profile__qr-label">LinkedIn</span>
     </a>
-  </div>
+  </aside>
+</div>
+
+<div class="history-wrap">
+<div class="history">
+  <section class="timeline">
+    <h2 class="timeline__heading">Expérience</h2>
+    
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">2023 — présent</span>
+          
+            <img class="timeline__logo" src="/assets/images/logos/placeholder.svg" alt="Entreprise A">
+          
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">Chargé(e) de développement commercial</p>
+          <p class="timeline__company">Entreprise A</p>
+          
+            <p class="timeline__desc">Prospection et développement du portefeuille clients, pilotage des négociations et suivi des indicateurs de performance commerciale.</p>
+          
+        </div>
+      </div>
+    
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">2021 — 2023</span>
+          
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">Assistant(e) marketing & communication</p>
+          <p class="timeline__company">Entreprise B</p>
+          
+            <p class="timeline__desc">Élaboration de contenus pour les réseaux sociaux, gestion des campagnes emailing et contribution à la stratégie de marque.</p>
+          
+        </div>
+      </div>
+    
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">2020</span>
+          
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">Stage — Relation client</p>
+          <p class="timeline__company">Entreprise C</p>
+          
+            <p class="timeline__desc">Accueil et accompagnement des clients, traitement des réclamations et amélioration des processus de satisfaction.</p>
+          
+        </div>
+      </div>
+    
+  </section>
+
+  <section class="timeline">
+    <h2 class="timeline__heading">Formation</h2>
+    
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">2019 — 2022</span>
+          
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">Bachelor Marketing & Commerce</p>
+          <p class="timeline__company">École de Commerce</p>
+          
+            <p class="timeline__desc">Spécialisation en stratégie commerciale et communication digitale.</p>
+          
+        </div>
+      </div>
+    
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">2017 — 2019</span>
+          
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">BTS Négociation et Digitalisation de la Relation Client</p>
+          <p class="timeline__company">Lycée professionnel</p>
+          
+            <p class="timeline__desc">Formation aux techniques de vente, gestion de la relation client et outils CRM.</p>
+          
+        </div>
+      </div>
+    
+  </section>
+</div>
 </div>
 
   </main>
-  <!-- modal — implemented in Phase 8 -->
+  <div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal__backdrop"></div>
+  <div class="modal__content">
+    <button class="modal__close" aria-label="Fermer">&times;</button>
+    <img class="modal__image" id="modal-image" src="" alt="">
+    <div class="modal__body">
+      <h2 class="modal__title" id="modal-title"></h2>
+      <p class="modal__text" id="modal-text"></p>
+    </div>
+  </div>
+</div>
 
   <script src="/assets/js/main.js"></script>
 </body>

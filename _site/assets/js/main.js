@@ -17,13 +17,111 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Burger menu ──────────────────────────────────────────
+  const burger   = document.getElementById('nav-burger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (burger && navLinks) {
+    burger.addEventListener('click', function () {
+      const open = navLinks.classList.toggle('is-open');
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+
+    // Close on link click (navigation)
+    navLinks.addEventListener('click', function (e) {
+      if (e.target.closest('.nav__link')) {
+        navLinks.classList.remove('is-open');
+        burger.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close on outside click
+    document.addEventListener('click', function (e) {
+      if (!burger.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('is-open');
+        burger.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // ── Active nav link ───────────────────────────────────────
   const path = window.location.pathname.replace(/\/$/, '') || '/';
   document.querySelectorAll('.nav__link').forEach(function (link) {
     const href = link.getAttribute('href').replace(/\/$/, '') || '/';
-    if (href === path) {
-      link.classList.add('nav__link--active');
+    if (href === path) link.classList.add('nav__link--active');
+  });
+
+  // ── Modal ─────────────────────────────────────────────────
+  const modal      = document.getElementById('modal');
+  const modalImg   = document.getElementById('modal-image');
+  const modalTitle = document.getElementById('modal-title');
+  const modalText  = document.getElementById('modal-text');
+  const modalClose = modal.querySelector('.modal__close');
+  const modalBack  = modal.querySelector('.modal__backdrop');
+
+  // Elements that existed before the modal opened, for focus restoration
+  var lastFocused = null;
+
+  function openModal(title, body, image) {
+    lastFocused = document.activeElement;
+    modalTitle.textContent = title;
+    modalText.textContent  = body;
+    modalImg.src           = image;
+    modalImg.alt           = title;
+    modal.classList.add('modal--open');
+    document.body.style.overflow = 'hidden';
+    trapFocus(modal);
+    modalClose.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('modal--open');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // Delegate clicks on cards
+  document.addEventListener('click', function (e) {
+    const card = e.target.closest('[data-modal-trigger]');
+    if (card) openModal(
+      card.dataset.title,
+      card.dataset.body,
+      card.dataset.image
+    );
+  });
+
+  // Keyboard trigger on cards (Enter / Space)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Enter' || e.key === ' ') {
+      const card = e.target.closest('[data-modal-trigger]');
+      if (card) { e.preventDefault(); openModal(card.dataset.title, card.dataset.body, card.dataset.image); }
     }
   });
+
+  modalClose.addEventListener('click', closeModal);
+  modalBack.addEventListener('click', closeModal);
+
+  // Focus trap
+  function trapFocus(container) {
+    const focusable = container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+
+    container.addEventListener('keydown', function trap(e) {
+      if (e.key !== 'Tab') return;
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+      if (!modal.classList.contains('modal--open')) container.removeEventListener('keydown', trap);
+    });
+  }
 
 });

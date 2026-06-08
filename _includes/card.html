@@ -1,0 +1,20 @@
+<article
+  class="card"
+  data-modal-trigger
+  data-title="{{ include.competence.title }}"
+  data-body="{{ include.competence.body }}"
+  data-image="{{ include.competence.image | relative_url }}"
+  tabindex="0"
+  role="button"
+  aria-label="Voir : {{ include.competence.title }}"
+>
+  <img
+    class="card__image"
+    src="{{ include.competence.image | relative_url }}"
+    alt="{{ include.competence.title }}"
+  >
+  <div class="card__body">
+    <h2 class="card__title">{{ include.competence.title }}</h2>
+    <p class="card__summary">{{ include.competence.summary }}</p>
+  </div>
+</article>

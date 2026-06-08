@@ -6,11 +6,14 @@ title: "Accueil"
 <p id="header-tagline">Bienvenue sur mon portfolio</p>
 
 <div class="profile">
-  <img
-    class="profile__photo"
-    src="{{ site.data.profile.photo | relative_url }}"
-    alt="Photo de {{ site.data.profile.name }}"
-  >
+  <div class="profile__photo-wrap">
+    <img
+      class="profile__photo"
+      src="{{ site.data.profile.photo | relative_url }}"
+      alt="Photo de {{ site.data.profile.name }}"
+    >
+  </div>
+
   <div class="profile__info">
     <h1 class="profile__name">{{ site.data.profile.name }}</h1>
     <p class="profile__title">{{ site.data.profile.title }}</p>
@@ -20,9 +23,58 @@ title: "Accueil"
         <li class="profile__interest-tag">{{ interest }}</li>
       {% endfor %}
     </ul>
+  </div>
+
+  <aside class="profile__aside">
     <a class="profile__qr" href="{{ site.data.profile.linkedin_url }}" target="_blank" rel="noopener">
       <img src="{{ site.data.profile.qr_code | relative_url }}" alt="QR code LinkedIn">
       <span class="profile__qr-label">LinkedIn</span>
     </a>
-  </div>
+  </aside>
+</div>
+
+<div class="history-wrap">
+<div class="history">
+  <section class="timeline">
+    <h2 class="timeline__heading">Expérience</h2>
+    {% for item in site.data.profile.experience %}
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">{{ item.period }}</span>
+          {% if item.logo %}
+            <img class="timeline__logo" src="{{ item.logo | relative_url }}" alt="{{ item.company }}">
+          {% endif %}
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">{{ item.title }}</p>
+          <p class="timeline__company">{{ item.company }}</p>
+          {% if item.description %}
+            <p class="timeline__desc">{{ item.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+
+  <section class="timeline">
+    <h2 class="timeline__heading">Formation</h2>
+    {% for item in site.data.profile.education %}
+      <div class="timeline__item">
+        <div class="timeline__left">
+          <span class="timeline__period">{{ item.period }}</span>
+          {% if item.logo %}
+            <img class="timeline__logo" src="{{ item.logo | relative_url }}" alt="{{ item.school }}">
+          {% endif %}
+        </div>
+        <div class="timeline__content">
+          <p class="timeline__title">{{ item.degree }}</p>
+          <p class="timeline__company">{{ item.school }}</p>
+          {% if item.description %}
+            <p class="timeline__desc">{{ item.description }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+</div>
 </div>
