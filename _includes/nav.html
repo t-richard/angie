@@ -1,15 +1,18 @@
 <nav id="nav">
   <div class="nav__inner">
-    <a class="nav__name" href="{{ '/' | relative_url }}">{{ site.data.profile.name }}</a>
+    <a class="nav__name" href="{{ '/' | relative_url }}">
+      <span class="nav__name-mark">AD</span>
+      <span class="nav__name-full">{{ site.data.profile.name }}</span>
+    </a>
     <button class="nav__burger" id="nav-burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
     <ul class="nav__links" id="nav-links">
-      <li><a class="nav__link" href="{{ '/marketing' | relative_url }}">Marketing</a></li>
-      <li><a class="nav__link" href="{{ '/vente' | relative_url }}">Vente</a></li>
-      <li><a class="nav__link" href="{{ '/communication' | relative_url }}">Communication</a></li>
-      <li><a class="nav__link" href="{{ '/business-developpement' | relative_url }}">Business Développement</a></li>
-      <li><a class="nav__link" href="{{ '/management-relation-client' | relative_url }}">Management de la Relation Client</a></li>
+      <li><a class="nav__link" href="{{ '/marketing' | relative_url }}"><span class="nav__link-num">01</span>Marketing</a></li>
+      <li><a class="nav__link" href="{{ '/vente' | relative_url }}"><span class="nav__link-num">02</span>Vente</a></li>
+      <li><a class="nav__link" href="{{ '/communication' | relative_url }}"><span class="nav__link-num">03</span>Communication</a></li>
+      <li><a class="nav__link" href="{{ '/business-developpement' | relative_url }}"><span class="nav__link-num">04</span>Business Dév.</a></li>
+      <li><a class="nav__link" href="{{ '/management-relation-client' | relative_url }}"><span class="nav__link-num">05</span>Relation Client</a></li>
     </ul>
   </div>
 </nav>

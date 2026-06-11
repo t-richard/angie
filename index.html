@@ -3,81 +3,118 @@ layout: default
 title: "Accueil"
 ---
 
-<p id="header-tagline">Bienvenue sur mon portfolio</p>
+{% assign p = site.data.profile %}
 
-<div class="profile">
-  <div class="profile__photo-wrap">
-    <img
-      class="profile__photo"
-      src="{{ site.data.profile.photo | relative_url }}"
-      alt="Photo de {{ site.data.profile.name }}"
-    >
+<!-- ─── Hero / masthead ─────────────────────────────────────── -->
+<header class="hero">
+  <p class="hero__kicker">
+    <span>Portfolio</span>
+    <span class="hero__kicker-rule"></span>
+    <span>{{ p.title }}</span>
+  </p>
+
+  <div class="hero__grid">
+    <div class="hero__lead">
+      <h1 class="hero__name">
+        <span class="hero__name-first">Angie</span>
+        <span class="hero__name-last">Dubois</span>
+      </h1>
+      <p class="hero__desc">{{ p.description }}</p>
+      <ul class="hero__tags">
+        {% for interest in p.interests %}
+          <li class="hero__tag">{{ interest }}</li>
+        {% endfor %}
+      </ul>
+      <a class="hero__scroll" href="#domaines">
+        <span>Découvrir</span>
+        <span class="hero__scroll-arrow" aria-hidden="true">↓</span>
+      </a>
+    </div>
+
+    <figure class="hero__portrait">
+      <img src="{{ p.photo | relative_url }}" alt="Photo de {{ p.name }}">
+      <figcaption>
+        <a href="{{ p.linkedin_url }}" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      </figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- ─── Domains showcase ────────────────────────────────────── -->
+<section class="domains reveal" id="domaines">
+  <div class="section-head">
+    <p class="section-head__kicker">Mes domaines</p>
+    <h2 class="section-head__title">Cinq terrains<br>de <em>compétence.</em></h2>
   </div>
 
-  <div class="profile__info">
-    <h1 class="profile__name">{{ site.data.profile.name }}</h1>
-    <p class="profile__title">{{ site.data.profile.title }}</p>
+  <ul class="domains__list">
+    {% for d in site.data.profile.domains %}
+      <li class="domains__item">
+        <a class="domains__link" href="{{ d.slug | prepend: '/' | relative_url }}">
+          <span class="domains__num">{{ d.number }}</span>
+          <span class="domains__main">
+            <span class="domains__title">{{ d.title }}</span>
+            <span class="domains__blurb">{{ d.blurb }}</span>
+          </span>
+          <span class="domains__arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<!-- ─── History — experience + education ────────────────────── -->
+<section class="history reveal">
+  <div class="section-head">
+    <p class="section-head__kicker">Parcours</p>
+    <h2 class="section-head__title">Expérience<br>&amp; <em>formation.</em></h2>
   </div>
 
-  <aside class="profile__aside">
-    <a class="profile__qr" href="{{ site.data.profile.linkedin_url }}" target="_blank" rel="noopener">
-      <img src="{{ site.data.profile.qr_code | relative_url }}" alt="QR code LinkedIn">
-      <span class="profile__qr-label">LinkedIn</span>
-    </a>
-  </aside>
-
-  <div class="profile__body">
-    <p class="profile__description">{{ site.data.profile.description }}</p>
-    <ul class="profile__interests">
-      {% for interest in site.data.profile.interests %}
-        <li class="profile__interest-tag">{{ interest }}</li>
+  <div class="history__cols">
+    <div class="timeline">
+      <h3 class="timeline__heading">Expérience</h3>
+      {% for item in p.experience %}
+        <article class="timeline__item">
+          <span class="timeline__period">{{ item.period }}</span>
+          <div class="timeline__content">
+            <h4 class="timeline__title">{{ item.title }}</h4>
+            <p class="timeline__company">{{ item.company }}</p>
+            {% if item.description %}<p class="timeline__desc">{{ item.description }}</p>{% endif %}
+          </div>
+        </article>
       {% endfor %}
-    </ul>
+    </div>
+
+    <div class="timeline">
+      <h3 class="timeline__heading">Formation</h3>
+      {% for item in p.education %}
+        <article class="timeline__item">
+          <span class="timeline__period">{{ item.period }}</span>
+          <div class="timeline__content">
+            <h4 class="timeline__title">{{ item.degree }}</h4>
+            <p class="timeline__company">{{ item.school }}</p>
+            {% if item.description %}<p class="timeline__desc">{{ item.description }}</p>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
   </div>
-</div>
+</section>
 
-<div class="history-wrap">
-<div class="history">
-  <section class="timeline">
-    <h2 class="timeline__heading">Expérience</h2>
-    {% for item in site.data.profile.experience %}
-      <div class="timeline__item">
-        <div class="timeline__left">
-          <span class="timeline__period">{{ item.period }}</span>
-          {% if item.logo %}
-            <img class="timeline__logo" src="{{ item.logo | relative_url }}" alt="{{ item.company }}">
-          {% endif %}
-        </div>
-        <div class="timeline__content">
-          <p class="timeline__title">{{ item.title }}</p>
-          <p class="timeline__company">{{ item.company }}</p>
-          {% if item.description %}
-            <p class="timeline__desc">{{ item.description }}</p>
-          {% endif %}
-        </div>
-      </div>
-    {% endfor %}
-  </section>
+<!-- ─── Approach / values ───────────────────────────────────── -->
+<section class="approach reveal">
+  <div class="section-head">
+    <p class="section-head__kicker">Ma démarche</p>
+    <h2 class="section-head__title">Ce qui guide<br>mon <em>travail.</em></h2>
+  </div>
 
-  <section class="timeline">
-    <h2 class="timeline__heading">Formation</h2>
-    {% for item in site.data.profile.education %}
-      <div class="timeline__item">
-        <div class="timeline__left">
-          <span class="timeline__period">{{ item.period }}</span>
-          {% if item.logo %}
-            <img class="timeline__logo" src="{{ item.logo | relative_url }}" alt="{{ item.school }}">
-          {% endif %}
-        </div>
-        <div class="timeline__content">
-          <p class="timeline__title">{{ item.degree }}</p>
-          <p class="timeline__company">{{ item.school }}</p>
-          {% if item.description %}
-            <p class="timeline__desc">{{ item.description }}</p>
-          {% endif %}
-        </div>
-      </div>
+  <div class="approach__grid">
+    {% for v in site.data.profile.values %}
+      <article class="value">
+        <span class="value__num">{{ forloop.index | prepend: '0' }}</span>
+        <h3 class="value__title">{{ v.title }}</h3>
+        <p class="value__text">{{ v.text }}</p>
+      </article>
     {% endfor %}
-  </section>
-</div>
-</div>
+  </div>
+</section>

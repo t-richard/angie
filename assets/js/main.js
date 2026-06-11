@@ -10,11 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   if (splash) {
-    const timer = setTimeout(dismissSplash, 2500);
-    splash.addEventListener('click', function () {
-      clearTimeout(timer);
-      dismissSplash();
-    });
+    setTimeout(dismissSplash, 2500);
   }
 
   // ── Burger menu ──────────────────────────────────────────
@@ -143,6 +139,29 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(function () {
         cards.forEach(function (card) { card.classList.add('card--visible'); });
       }, 1500);
+    }
+  }
+
+  // ── Section reveal-on-scroll ──────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  if (reveals.length > 0) {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      reveals.forEach(function (el) { el.classList.add('reveal--in'); });
+    } else {
+      const revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal--in');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      reveals.forEach(function (el) { revealObserver.observe(el); });
+      // Fallback: ensure everything is visible
+      setTimeout(function () {
+        reveals.forEach(function (el) { el.classList.add('reveal--in'); });
+      }, 2000);
     }
   }
 

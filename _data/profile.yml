@@ -1,6 +1,11 @@
 name: "Angie Dubois"
 title: "Apprentie Manager Commerciale"
 description: "Apprentie manager commerciale en alternance, spécialisée dans la relation client, la vente et le management commercial."
+
+# Contact (editable placeholders)
+email: "angie.dubois@example.com"
+cv_url: "/assets/cv-angie-dubois.pdf"
+available: "Disponible en alternance · 2025 — 2026"
 interests:
   - "Commerce & négociation"
   - "Relation client"
@@ -43,3 +48,37 @@ education:
     period: "2020 — 2023"
     description: "Mention bien. Parcours Gestion Finance. "
     logo: "/assets/images/logos/iut.jpeg"
+
+# Five competence domains — shown as a numbered editorial index on the home page.
+domains:
+  - number: "01"
+    title: "Marketing"
+    slug: "marketing"
+    blurb: "Stratégie de contenu, marketing digital et identité de marque pour faire rayonner l'offre."
+  - number: "02"
+    title: "Vente"
+    slug: "vente"
+    blurb: "Prospection, négociation et closing — transformer l'intérêt en engagement durable."
+  - number: "03"
+    title: "Communication"
+    slug: "communication"
+    blurb: "Messages clairs et cohérents, à l'écrit comme à l'oral, sur tous les canaux."
+  - number: "04"
+    title: "Business Développement"
+    slug: "business-developpement"
+    blurb: "Détection d'opportunités, partenariats et plans de croissance ambitieux."
+  - number: "05"
+    title: "Management de la Relation Client"
+    slug: "management-relation-client"
+    blurb: "Satisfaction, fidélisation et pilotage d'une relation client d'exception."
+
+# "Ma démarche" — values / posture.
+values:
+  - title: "Écoute & relation client"
+    text: "Comprendre avant de proposer. Chaque échange est l'occasion de créer une relation de confiance qui dure."
+  - title: "Négociation"
+    text: "Chercher l'accord gagnant-gagnant, défendre la valeur sans jamais perdre de vue l'intérêt du client."
+  - title: "Rigueur & organisation"
+    text: "Des objectifs clairs, un suivi méthodique et le sens du détail pour tenir les engagements pris."
+  - title: "Esprit d'équipe"
+    text: "Avancer collectif : partager l'information, faire monter le groupe et célébrer les réussites ensemble."

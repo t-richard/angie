@@ -1,0 +1,28 @@
+<footer class="footer reveal" id="contact">
+  <div class="footer__inner">
+    <p class="footer__kicker">Contact</p>
+    <h2 class="footer__title">Travaillons<br><em>ensemble.</em></h2>
+    <p class="footer__avail">{{ site.data.profile.available }}</p>
+
+    <div class="footer__actions">
+      <a class="footer__cta" href="{{ site.data.profile.linkedin_url }}" target="_blank" rel="noopener">
+        <span class="footer__cta-label">LinkedIn</span>
+        <span class="footer__cta-val">/in/angiedubois01 <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="footer__cta" href="mailto:{{ site.data.profile.email }}">
+        <span class="footer__cta-label">Email</span>
+        <span class="footer__cta-val">{{ site.data.profile.email }} <span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="footer__cta footer__cta--solid" href="{{ site.data.profile.cv_url | relative_url }}" download>
+        <span class="footer__cta-label">Curriculum</span>
+        <span class="footer__cta-val">Télécharger le CV <span aria-hidden="true">↓</span></span>
+      </a>
+    </div>
+
+    <div class="footer__base">
+      <span>{{ site.data.profile.name }}</span>
+      <span>{{ site.data.profile.title }}</span>
+      <span>© 2026 · Portfolio</span>
+    </div>
+  </div>
+</footer>

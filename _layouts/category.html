@@ -3,11 +3,21 @@ layout: default
 ---
 
 {% assign category = site.data[page.data_key] %}
+{% assign dom = site.data.profile.domains | where: "slug", category.slug | first %}
 
-<h1 class="category__title">{{ category.title }}</h1>
+<header class="cat-head reveal">
+  <p class="cat-head__kicker">
+    <span>Domaine{% if dom %} {{ dom.number }}{% endif %}</span>
+    <span class="cat-head__kicker-rule"></span>
+    <span>Portfolio · Angie Dubois</span>
+  </p>
+  <h1 class="cat-head__title">{{ category.title }}</h1>
+  {% if dom %}<p class="cat-head__intro">{{ dom.blurb }}</p>{% endif %}
+  <a class="cat-head__back" href="{{ '/' | relative_url }}"><span aria-hidden="true">←</span> Tous les domaines</a>
+</header>
 
 <div class="card-grid">
   {% for competence in category.competences %}
-    {% include card.html competence=competence %}
+    {% include card.html competence=competence index=forloop.index %}
   {% endfor %}
 </div>
