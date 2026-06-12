@@ -1,11 +1,6 @@
 title: "Vente"
 slug: "vente"
 competences:
-  - id: "vente-1"
-    title: "Identifier les besoins clients et proposer une solution adaptée"
-    summary: "?"
-    body: "Au cours de mes différentes expériences à la Brasserie La Choulette et chez Choulette Expérience, j’ai appris à analyser les besoins de chaque client afin de lui proposer une offre adaptée. L’écoute active et le questionnement m’ont permis de mieux comprendre leurs attentes et de les orienter vers les produits les plus pertinents. Cette capacité à personnaliser le conseil contribue directement à la satisfaction client et à la qualité de la relation commerciale."
-    image: "/assets/images/placeholder.svg"
   - id: "vente-2"
     title: "Développer le chiffre d'affaires et le panier moyen"
     summary: "?"
