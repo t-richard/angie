@@ -3,9 +3,9 @@ title: "Apprentie Manager Commerciale"
 description: "Apprentie manager commerciale en alternance, spécialisée dans la relation client, la vente et le management commercial."
 
 # Contact (editable placeholders)
-email: "angie.dubois@example.com"
-cv_url: "/assets/cv-angie-dubois.pdf"
-available: "Disponible en alternance · 2025 — 2026"
+email: "angie.dubois1977@gmail.com"
+cv_url: "assets/images/CV Dubois Angie (1).png"
+available: "Disponible pour toutes opportunités professionnelles"
 interests:
   - "Commerce & négociation"
   - "Relation client"
@@ -37,7 +37,7 @@ experience:
     period: "août 2023 — avril 2024"
     description: "Alternance — conseil, vente en boutique et gestion des appels à Hordain. Développement des compétences commerciales et relation client."
     logo: "/assets/images/logos/choulette.jpeg"
-education:
+formation:
   - degree: "BUT Techniques de Commercialisation (TC)"
     school: "IUT Valenciennes-Cambrai-Maubeuge | UPHF"
     period: "2023 — 2026"
@@ -47,7 +47,12 @@ education:
     school: "Lycée Louis Pasteur Somain"
     period: "2020 — 2023"
     description: "Mention bien. Parcours Gestion Finance. "
-    logo: "/assets/images/logos/iut.jpeg"
+    logo: "assets/images/Logo-louis-pasteur-Somain.png"
+  - degree: "Brevet des collèges"
+    school: "Collège Louis Pasteur Somain"
+    period: "2016 — 2020"
+    description: "Mention très bien."
+    logo: "assets/images/Logo-louis-pasteur-Somain.png"
 
 # Five competence domains — shown as a numbered editorial index on the home page.
 domains:
