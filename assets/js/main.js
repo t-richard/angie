@@ -73,6 +73,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const modalText  = document.getElementById('modal-text');
   const modalClose = modal.querySelector('.modal__close');
   const modalBack  = modal.querySelector('.modal__backdrop');
+  const modalImgBtn = document.getElementById('modal-image-btn');
+
+  // Fullscreen image zoom
+  const zoom      = document.getElementById('img-zoom');
+  const zoomImg   = document.getElementById('img-zoom-image');
+  const zoomClose = zoom.querySelector('.img-zoom__close');
+
+  function openZoom(src, alt) {
+    zoomImg.src = src;
+    zoomImg.alt = alt || '';
+    zoom.classList.add('img-zoom--open');
+    zoom.setAttribute('aria-hidden', 'false');
+  }
+  function closeZoom() {
+    zoom.classList.remove('img-zoom--open');
+    zoom.setAttribute('aria-hidden', 'true');
+  }
+
+  if (modalImgBtn) {
+    modalImgBtn.addEventListener('click', function () {
+      openZoom(modalImg.src, modalImg.alt);
+    });
+  }
+  zoom.addEventListener('click', function () { closeZoom(); });
 
   // Elements that existed before the modal opened, for focus restoration
   var lastFocused = null;
@@ -90,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function closeModal() {
+    closeZoom();
     modal.classList.remove('modal--open');
     document.body.style.overflow = '';
     if (lastFocused) lastFocused.focus();
@@ -107,7 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Keyboard trigger on cards (Enter / Space)
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Escape') {
+      if (zoom.classList.contains('img-zoom--open')) { closeZoom(); }
+      else { closeModal(); }
+      return;
+    }
     if (e.key === 'Enter' || e.key === ' ') {
       const card = e.target.closest('[data-modal-trigger]');
       if (card) { e.preventDefault(); openModal(card.dataset.title, card.dataset.body, card.dataset.image); }

@@ -2,10 +2,18 @@
   <div class="modal__backdrop"></div>
   <div class="modal__content">
     <button class="modal__close" aria-label="Fermer">&times;</button>
-    <img class="modal__image" id="modal-image" src="" alt="">
+    <button class="modal__image-btn" id="modal-image-btn" aria-label="Agrandir l'image">
+      <img class="modal__image" id="modal-image" src="" alt="">
+      <span class="modal__zoom-hint" aria-hidden="true">⤢ Agrandir</span>
+    </button>
     <div class="modal__body">
       <h2 class="modal__title" id="modal-title"></h2>
       <p class="modal__text" id="modal-text"></p>
     </div>
   </div>
+</div>
+
+<div id="img-zoom" class="img-zoom" aria-hidden="true">
+  <button class="img-zoom__close" aria-label="Fermer l'agrandissement">&times;</button>
+  <img class="img-zoom__img" id="img-zoom-image" src="" alt="">
 </div>
